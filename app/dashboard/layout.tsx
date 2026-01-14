@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -80,11 +80,21 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const theme = useTheme();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const router = useRouter();
   const pathname = usePathname();
 
   const onClickToggle = () => setOpen((prev) => !prev);
+
+  useEffect(() => {
+  // Wait for the transition to finish before triggering the resize
+  const timeoutId = setTimeout(() => {
+    window.dispatchEvent(new Event('resize'));
+  }, 300); // 300ms covers the standard MUI transition duration
+
+  return () => clearTimeout(timeoutId);
+}, [open]);
+
 
   // Navigation items
   const mainMenuItems = [
@@ -200,7 +210,9 @@ export default function DashboardLayout({
           flexGrow: 1, 
           p: 3,
           backgroundColor: theme.palette.background.default,
-          minHeight: '100vh'
+          minHeight: '100vh',
+          overflowX: "hidden",
+          width: '100%'
         }}
       >
         <DrawerHeader />
