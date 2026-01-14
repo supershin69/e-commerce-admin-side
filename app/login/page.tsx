@@ -22,20 +22,22 @@ export default function LoginPage() {
     const router = useRouter();
 
     const handleLoginClick = async () => {
-        setLoading(true);
+       setLoading(true);
         setError("");
 
+        // Call your helper function
         const result = await login(email, password);
 
         if (result.error) {
             setError(result.error);
+            setLoading(false);
         } else {
-            console.log("Logged in userId:", result.userId);
+            // Success! 
+            // 1. Refresh router to update Server Components with new cookies
+            router.refresh();
+            // 2. Redirect
             router.push("/dashboard");
-            
         }
-
-        setLoading(false);
     };
     
 

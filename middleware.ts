@@ -11,7 +11,7 @@ export async function middleware(req: NextRequest) {
         {
             cookies: {
                 get(name) {
-                    return res.cookies.get(name)?.value;
+                    return req.cookies.get(name)?.value;
                 },
                 set(name, value, options) {
                     res.cookies.set({name, value, ...options});
@@ -24,7 +24,11 @@ export async function middleware(req: NextRequest) {
         }
     );
 
+    console.log("Incoming cookies:", req.cookies.getAll());
+
     const { data: { session } } = await supabase.auth.getSession();
+
+    console.log("Session from middleware:", session);
 
     if(!session) {
         return NextResponse.redirect(new URL('/login', req.url));
