@@ -2,7 +2,7 @@
 import { fetchPendingOrders } from "@/app/lib/fetchPendingOrders";
 import { useState, useEffect } from "react"
 import TrendCard from "../../trendCard";
-import { AccessTime, Person } from "@mui/icons-material";
+import { AccessTime } from "@mui/icons-material";
 
 const PendingOrderCount = () => {
 

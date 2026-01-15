@@ -2,7 +2,7 @@
 import { fetchNearOutOfStockProducts } from "@/app/lib/fetchNearOutOfStockProducts";
 import { useState, useEffect } from "react"
 import TrendCard from "../../trendCard";
-import { Person, ProductionQuantityLimits } from "@mui/icons-material";
+import { ProductionQuantityLimits } from "@mui/icons-material";
 
 const NearOutOfStockCard = () => {
 

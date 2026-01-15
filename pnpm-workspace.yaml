@@ -1,5 +1,7 @@
 packages:
   - .
+
 ignoredBuiltDependencies:
+  - '@mui/x-telemetry'
   - sharp
   - unrs-resolver
